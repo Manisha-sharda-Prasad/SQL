@@ -1,26 +1,28 @@
---select  c.customername, c.country, c.city from retailapp.customers c
+--1. Show all customers with their city and country.
+select  c.customername, c.country, c.city
+from customers c;
 
---select p.productname , p.price from retailapp.products pwhere p.price > 20
+--2.List all products with their price greater than 20.
+select p.productname , p.price
+from retailapp.products p
+where p.price > 20;
 
+--3. Get all orders placed by a customer named “John Doe”.
 select 
 	c.customername , o.orderid , p.productname
 from 
-	retailapp.orders o , 
-	retailapp.customers c , 
-	retailapp.products p , 
-	retailapp.orderdetails od 
+	orders o ,
+	customers c ,
+	products p ,
+	orderdetails od
 where 
-	c.customerid = o.customerid  					-- table join :: condition
-	and p.productid  = od.productid 			-- table join :: condition
-	
-	and c.customername = 'Antonio Moreno Taquería' ; 	-- problem statement :: condition
+	c.customerid = o.customerid  					        -- table join :: condition
+	and p.productid  = od.productid 			            -- table join :: condition
+	and c.customername = 'Antonio Moreno Taquería' ; 	    -- problem statement :: condition
 	-- n table => n-1 table join condition / min
 
 
---select p.productname ,c.categoryid, c.categoryname  from retailapp.products p , retailapp.categories c where c.categoryname = 'Beverages' and p.categoryid = c.categoryid 
-
--- #3 Get all orders placed by a customer named “John Doe”.
-
+--3. Get all orders placed by a customer named “John Doe”.
 select distinct 
 	c.customername,
 	p.productname 
@@ -31,7 +33,11 @@ from     customers c
 where 
 	c.customername = 'Antonio Moreno Taquería' -- condition
 order by 
-	p.productname 
+	p.productname;
 
+--4.Find all products in the “Beverages” category.
+select p.productname ,c.categoryid, c.categoryname
+from retailapp.products p , retailapp.categories c
+where c.categoryname = 'Beverages' and p.categoryid = c.categoryid ;
 
-
+--5.Show the order details (OrderID, ProductName, Quantity) for a specific OrderID = 1.
