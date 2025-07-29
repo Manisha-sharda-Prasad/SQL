@@ -50,8 +50,10 @@ where od.orderid = 1;
 --6.Display all orders with the customer name and order date.
 select   c.customername , o.orderdate
 from orders o
-join customers c on o.customerid = c.customerid
-
-
+join customers c on o.customerid = c.customerid;
 
 --7.Show all product names along with their supplier name.
+
+select p.productname , s.suppliername
+from products p
+join suppliers s on p.supplierid = s.supplierid
