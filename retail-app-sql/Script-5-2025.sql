@@ -13,7 +13,7 @@ where
 	c.customerid = o.customerid  					-- table join :: condition
 	and p.productid  = od.productid 			-- table join :: condition
 	
-	and c.customername = 'Antonio Moreno Taquería' 	-- problem statement :: condition
+	and c.customername = 'Antonio Moreno Taquería' ; 	-- problem statement :: condition
 	-- n table => n-1 table join condition / min
 
 
