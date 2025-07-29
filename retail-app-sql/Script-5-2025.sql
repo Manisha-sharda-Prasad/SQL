@@ -4,7 +4,7 @@ from customers c;
 
 --2.List all products with their price greater than 20.
 select p.productname , p.price
-from retailapp.products p
+from products p
 where p.price > 20;
 
 --3. Get all orders placed by a customer named “John Doe”.
@@ -37,7 +37,21 @@ order by
 
 --4.Find all products in the “Beverages” category.
 select p.productname ,c.categoryid, c.categoryname
-from retailapp.products p , retailapp.categories c
+from products p , categories c
 where c.categoryname = 'Beverages' and p.categoryid = c.categoryid ;
 
+
 --5.Show the order details (OrderID, ProductName, Quantity) for a specific OrderID = 1.
+select od.orderid, p.productname, od.quantity
+from orderdetails od
+join products p on od.productid = p.productid
+where od.orderid = 1;
+
+--6.Display all orders with the customer name and order date.
+select   c.customername , o.orderdate
+from orders o
+join customers c on o.customerid = c.customerid
+
+
+
+--7.Show all product names along with their supplier name.
