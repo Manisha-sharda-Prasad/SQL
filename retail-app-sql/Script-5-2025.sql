@@ -56,4 +56,14 @@ join customers c on o.customerid = c.customerid;
 
 select p.productname , s.suppliername
 from products p
-join suppliers s on p.supplierid = s.supplierid
+join suppliers s on p.supplierid = s.supplierid;
+
+--8.List all order details with OrderID, ProductName, Price, Quantity and Total (Price * Quantity).
+select od.orderid, p.productname, p.price, od.quantity , (p.price * od.quantity) as Total
+from orderdetails od
+join products p on od.productid = p.productid;
+
+
+--9.Show all products in each category (CategoryName and ProductName).
+
+--10.Get all orders with Shipper Name (Orders + Shippers + Customers).
