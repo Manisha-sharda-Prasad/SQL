@@ -1,3 +1,5 @@
+-- Beginner-level , Join Queries:--
+
 --1. Show all customers with their city and country.
 select  c.customername, c.country, c.city
 from customers c;
@@ -65,5 +67,27 @@ join products p on od.productid = p.productid;
 
 
 --9.Show all products in each category (CategoryName and ProductName).
+select p.productname, c.categoryname
+from products p , categories c;
 
 --10.Get all orders with Shipper Name (Orders + Shippers + Customers).
+
+select s.shippername , o.orderid , c.contactname
+from orders o
+join shippers s on o.shipperid = s.shipperid
+join customers c on o.customerid = c.customerid;
+
+--Aggregation:--
+
+--11.Count total orders placed by each customer.
+
+
+
+
+--Show total revenue (sum of Price * Quantity) generated per product.
+
+--Find the average price of products supplied by each supplier.
+
+--Show the total number of products in each category.
+
+--Find the maximum and minimum product price.
