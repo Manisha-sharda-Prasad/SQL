@@ -104,4 +104,11 @@ from products p
 join categories c on p.categoryid = c.categoryid
 group by c.categoryname;
 
---15.Find the maximum and minimum product price.
+--15.Find the maximum and minimum product price.❌
+select p.productname, min(p.price) , max(p.price)
+from products p
+group by p.productname;
+
+-- 15.Find the maximum and minimum product price. (in whole table) ☑️
+select min(p.price) , max(p.price)
+from products p
