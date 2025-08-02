@@ -55,7 +55,6 @@ from orders o
 join customers c on o.customerid = c.customerid;
 
 --7.Show all product names along with their supplier name.
-
 select p.productname , s.suppliername
 from products p
 join suppliers s on p.supplierid = s.supplierid;
@@ -70,8 +69,8 @@ join products p on od.productid = p.productid;
 select p.productname, c.categoryname
 from products p , categories c;
 
---10.Get all orders with Shipper Name (Orders + Shippers + Customers).
 
+--10.Get all orders with Shipper Name (Orders + Shippers + Customers).
 select s.shippername , o.orderid , c.contactname
 from orders o
 join shippers s on o.shipperid = s.shipperid
@@ -80,14 +79,29 @@ join customers c on o.customerid = c.customerid;
 --Aggregation:--
 
 --11.Count total orders placed by each customer.
+select count(o.orderid), c.customername
+from orders o
+join customers c on o.customerid = c.customerid
+group by c.customername;
 
 
+--12.Show total revenue (sum of Price * Quantity) generated per product.
+select  p.productname,  sum(p.price * od.quantity) as "Total Revenue"
+from products p
+join orderdetails od on od.productid = p.productid
+group by p.productname ;
 
 
---Show total revenue (sum of Price * Quantity) generated per product.
+--13.Find the average price of products supplied by each supplier.
+select p.productname, s.suppliername, avg(p.price)
+from products p
+join suppliers s on  p.supplierid = s.supplierid
+group by p.productname , s.suppliername;
 
---Find the average price of products supplied by each supplier.
+--14.Show the total number of products in each category.
+select c.categoryname , count(p.productname ) as Total
+from products p
+join categories c on p.categoryid = c.categoryid
+group by c.categoryname;
 
---Show the total number of products in each category.
-
---Find the maximum and minimum product price.
+--15.Find the maximum and minimum product price.
