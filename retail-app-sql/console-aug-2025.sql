@@ -115,19 +115,55 @@ from retailapp.products p;
 --Subqueries--
 
 --16. Find customers who have not placed any order.
-select c.customername
+select *
 from retailapp.customers c
-join retailapp.orders o on c.customerid = o.customerid
-where c.customerid != o.customerid
+where c.customerid not in
+    (select distinct o.customerid from retailapp.orders o );
 
 
+--17.List products that have never been ordered.
+select  p.productname
+from retailapp.products p
+where p.productid not in
+       (select distinct od.productid from retailapp.orderdetails od);
 
 
---List products that have never been ordered.
+--18.Get the most expensive product ordered by each customer.
+select  c.customername
+from retailapp.customers c
+JOIN
+where c.customerid not in
+        (select p.productname ,max(p.price)
+         from retailapp.products p
+         group by p.productid);
 
---Get the most expensive product ordered by each customer.
+SELECT c.customername, p.productname, p.price
+FROM customers c
+JOIN orders o ON c.customerid = o.customerid
+JOIN orderdetails od ON o.orderid = od.orderid
+JOIN products p ON od.productid = p.productid
+WHERE (c.customerid, p.price) IN (
+    SELECT c2.customerid, MAX(p2.price)
+    FROM customers c2
+    JOIN orders o2 ON c2.customerid = o2.customerid
+    JOIN orderdetails od2 ON o2.orderid = od2.orderid
+    JOIN products p2 ON od2.productid = p2.productid
+    GROUP BY c2.customerid
+);
 
---Find employees who handled more than 5 orders.
+--19.Find employees who handled more than 5 orders.
+select e.firstname
+from retailapp.employees e
+join retailapp.orders o on e.employeeid = o.employeeid
+where e.employeeid = o.employeeid
+and o.orderid > 5
 
---List suppliers who supply products in the same category as “Beverages”.
+SELECT e.firstname, COUNT(o.orderid) AS total_orders
+FROM employees e
+JOIN orders o ON e.employeeid = o.employeeid
+GROUP BY e.employeeid, e.firstname
+HAVING COUNT(o.orderid) > 5;
+
+
+--20.))))List suppliers who supply products in the same category as “Beverages”.
 
