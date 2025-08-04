@@ -129,34 +129,30 @@ where p.productid not in
 
 
 --18.Get the most expensive product ordered by each customer.
-select  c.customername
-from retailapp.customers c
-JOIN
-where c.customerid not in
-        (select p.productname ,max(p.price)
-         from retailapp.products p
-         group by p.productid);
 
-SELECT c.customername, p.productname, p.price
-FROM customers c
-JOIN orders o ON c.customerid = o.customerid
-JOIN orderdetails od ON o.orderid = od.orderid
-JOIN products p ON od.productid = p.productid
-WHERE (c.customerid, p.price) IN (
-    SELECT c2.customerid, MAX(p2.price)
-    FROM customers c2
-    JOIN orders o2 ON c2.customerid = o2.customerid
-    JOIN orderdetails od2 ON o2.orderid = od2.orderid
-    JOIN products p2 ON od2.productid = p2.productid
-    GROUP BY c2.customerid
-);
+select  distinct c.customername, p.productname, p.price
+from retailapp.customers c
+join retailapp.orders o on c.customerid = o.customerid
+join retailapp.orderdetails od on o.orderid = od.orderid
+join retailapp.products p on p.productid = od.productid
+where (c.customerid , p.price ) in (
+        select c2.customerid, max(p2.price)
+         from retailapp.customers c2
+         join retailapp.orders o2 on c2.customerid = o2.customerid
+         join retailapp.orderdetails od2 on o.orderid = od2.orderid
+         join retailapp.products p2 on p2.productid = od2.productid
+         group by c2.customerid);
+
+
 
 --19.Find employees who handled more than 5 orders.
-select e.firstname
+
+select e.firstname, count(o.orderid) > 5 as Total_Orders
 from retailapp.employees e
 join retailapp.orders o on e.employeeid = o.employeeid
 where e.employeeid = o.employeeid
-and o.orderid > 5
+group by e.employeeid, e.firstname
+;
 
 SELECT e.firstname, COUNT(o.orderid) AS total_orders
 FROM employees e
