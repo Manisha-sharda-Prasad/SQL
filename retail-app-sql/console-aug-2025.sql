@@ -161,5 +161,24 @@ GROUP BY e.employeeid, e.firstname
 HAVING COUNT(o.orderid) > 5;
 
 
---20.))))List suppliers who supply products in the same category as “Beverages”.
+--20.List suppliers who supply products in the same category as “Beverages”.
+
+select distinct s.suppliername, p.productname , c.categoryname as "Beverages"
+from retailapp.suppliers s
+join retailapp.products p on s.supplierid = p.supplierid
+join retailapp.categories c on c.categoryid = p.categoryid
+where c.categoryname = 'Beverages';
+
+
+select distinct s.suppliername, p.productname
+from retailapp.suppliers s
+join retailapp.products p on s.supplierid = p.supplierid
+where p.categoryid = (
+        select c.categoryid
+        from retailapp.categories c
+        where c.categoryname = 'Beverages'
+    );
+
+
+
 
