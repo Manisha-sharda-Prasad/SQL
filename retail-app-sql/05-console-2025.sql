@@ -76,7 +76,6 @@ join retailapp.shippers s on o.shipperid = s.shipperid
 join retailapp.customers c on o.customerid = c.customerid;
 
 --Aggregation:--
-
 --11.Count total orders placed by each customer.
 select count(o.orderid), c.customername
 from retailapp.orders o
@@ -113,7 +112,6 @@ select min(p.price) , max(p.price)
 from retailapp.products p;
 
 --Subqueries--
-
 --16. Find customers who have not placed any order.
 select *
 from retailapp.customers c
@@ -155,8 +153,8 @@ group by e.employeeid, e.firstname
 ;
 
 SELECT e.firstname, COUNT(o.orderid) AS total_orders
-FROM employees e
-JOIN orders o ON e.employeeid = o.employeeid
+FROM retailapp.employees e
+JOIN retailapp.orders o ON e.employeeid = o.employeeid
 GROUP BY e.employeeid, e.firstname
 HAVING COUNT(o.orderid) > 5;
 

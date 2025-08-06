@@ -3,8 +3,7 @@
 -- sudo /usr/local/mysql/support-files/mysql.server start
 -- sudo /usr/local/mysql/support-files/mysql.server stop
 -- source ~/.bash_profile 
--- startmysql
--- stopmysql
+-- startmysql -- stopmysql
 
 Select * from orders;
 
@@ -52,14 +51,13 @@ Update Employees
  where EmployeeID = 2;
 
 -- Delete From Employees where LastName = 'Miller';
-
 SELECT * From Suppliers;
--- FETCH FIRST 4 ROWS ONLY
 
+-- FETCH FIRST 4 ROWS ONLY
 SELECT * FROM Suppliers
 WHERE Country = 'USA' ;
--- FETCH FIRST 3 ROWS ONLY;
 
+-- FETCH FIRST 3 ROWS ONLY;
 SELECT * From Suppliers
  where Country = 'USA'
  Limit 3;

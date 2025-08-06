@@ -74,9 +74,7 @@ where o.shipperid IS NULL
 -- right-join	: outer	  right-join 
 
 
-
 -- 3. Get the most ordered product.
-
 select *
 from retailapp.orderdetails od 
 where od.quantity = (
@@ -84,15 +82,12 @@ where od.quantity = (
 		from retailapp.orderdetails od
 );
 
-
 --4. Find the top 5 customers who have placed the highest number of orders.
-
 select o.customerid ,Count(*) as OrderCount  
 from  retailapp.orders o 
 group by o.customerid 
 order by OrderCount desc 
 limit 5;
-
 
 --5.Get the list of products that have never been ordered.
 
@@ -169,7 +164,6 @@ where o.customerid =c.customerid
 group by c.customerid ,o.orderid 
 order by c.customerid ,o.orderid ;
 
-						
 
 --14.Find customers who have never placed an order.
 select c.customerid ,c.customername 
@@ -195,8 +189,7 @@ and  od.orderid = o.orderid
 group by p.productname , o.orderdate; 
 
 
---17.List the customers who have placed orders with a total quantity- 
---exceeding a specified threshold (e.g., 100 units).
+--17.List the customers who have placed orders with a total quantity-
 select c.customername ,od.quantity 
 from retailapp.customers c , retailapp.orderdetails od , retailapp.orders o 
 where c.customerid = o.customerid 
@@ -211,8 +204,6 @@ where od.productid = p.productid
 and s.supplierid = p.supplierid 
 group by s.supplierid , s.country 
 order by s.supplierid , s.country ;
-
-
 
 
 --Find the average price of products for each supplier.
