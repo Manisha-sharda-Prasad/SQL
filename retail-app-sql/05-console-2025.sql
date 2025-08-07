@@ -1,4 +1,4 @@
--- Beginner-level , join retailapp.Queries:--
+-- Beginner-level :--
 
 --1. Show all customers with their city and country.
 select  c.customername, c.country, c.city
@@ -8,20 +8,6 @@ from retailapp.customers c;
 select p.productname , p.price
 from retailapp.products p
 where p.price > 20;
-
---3. Get all orders placed by a customer named “John Doe”.
-select
-	c.customername , o.orderid , p.productname
-from retailapp.orders o ,
-	retailapp.customers c ,
-	retailapp.products p ,
-	retailapp.orderdetails od
-where
-	c.customerid = o.customerid  					        -- table join retailapp.:: condition
-	and p.productid  = od.productid 			            -- table join retailapp.:: condition
-	and c.customername = 'Antonio Moreno Taquería' ; 	    -- problem statement :: condition
-	-- n table => n-1 table join retailapp.condition / min
-
 
 --3. Get all orders placed by a customer named “Antonio Moreno Taquería”.
 select distinct
@@ -53,6 +39,12 @@ select   c.customername , o.orderdate
 from retailapp.orders o
 join retailapp.customers c on o.customerid = c.customerid;
 
+--6.1. Get the 2 most recent Orders
+select o.orderid, o.orderdate
+from retailapp.orders o
+order by o.orderdate DESC
+limit 2;
+
 --7.Show all product names along with their supplier name.
 select p.productname , s.suppliername
 from retailapp.products p
@@ -75,6 +67,8 @@ from retailapp.orders o
 join retailapp.shippers s on o.shipperid = s.shipperid
 join retailapp.customers c on o.customerid = c.customerid;
 
+-- WHERE filters before Aggregation --HAVING filters after Aggregation,
+
 --Aggregation:--
 --11.Count total orders placed by each customer.
 select count(o.orderid), c.customername
@@ -95,6 +89,15 @@ select p.productname, s.suppliername, avg(p.price)
 from retailapp.products p
 join retailapp.suppliers s on  p.supplierid = s.supplierid
 group by p.productname , s.suppliername;
+
+
+--13.1. Find the average price of products. Considering only customers who paid price not equal to 0,and return only those products with an avg price greater than 20.
+select p.productname, avg(p.price) as Avg_Price
+from retailapp.products p
+where p.price != 0
+group by p.productname
+having avg(p.price) > 30;
+
 
 --14.Show the total number of products in each category.
 select c.categoryname , count(p.productname ) as Total
@@ -180,3 +183,13 @@ where p.categoryid = (
 
 
 
+--Complex Queries
+--Show top 3 customers who spent the most.
+
+--Find products that were ordered by all customers.
+
+--Find the month that had the highest total sales.
+
+--Get the latest order placed by each customer.
+
+--Find the shops (from Shop table) that have the most carts (from Cart table).
