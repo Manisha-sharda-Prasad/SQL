@@ -1,6 +1,6 @@
 
 --DDL (DATA DEFINITION LANGUAGE)- (CREATE, ALTER, DROP)
--- 1. CREATE TABLE-
+-- 1. CREATE TABLE-------------------------------------
 
 -- Customers Table
 CREATE TABLE IF NOT EXISTS  retailapp.Customers (
@@ -104,11 +104,7 @@ CREATE TABLE IF NOT EXISTS  retailapp. Cart (
     FOREIGN KEY (ProductID) REFERENCES retailapp.Products(ProductID)
 );
 
-
--- Primary Key: payment_id,  Foreign Key: customer_id → Customers(customer_id)
--- Payments
-
-
+-- Payments Table
 CREATE TABLE IF NOT EXISTS retailapp.Payments (
     PaymentID INT Primary Key,
     PaymentDate TimeStamp,
@@ -122,23 +118,31 @@ CREATE TABLE IF NOT EXISTS retailapp.Payments (
 
 
 
+-- 2. ALTER TABLE--------------------------------------
+
+-- Payments-
+Alter table retailapp.Payments
+ADD COLUMN IF NOT EXISTS PaymentMethod VARCHAR(50);
+
+-- Shop-
+Alter table retailapp.SHOP
+RENAME COLUMN POSTALCODE TO ZIPCODE;
+
+-- Cart-
+Alter table retailapp.Cart
+DROP COLUMN IF EXISTS CreatedAt;
+
+--alter table retailapp.Cart
+--MODIFY column Quantity INT NOT NULL;
 
 
 
-
-
-
-
-
-
-
-
--- DROP TABLE-
+--3. DROP TABLE--------------------------------------
 
 -- DROP TABLE IF NOT EXISTS  retailapp. CATEGORIES ;
 -- DROP TABLE IF NOT EXISTS  retailapp. CUSTOMERS ;
 -- DROP TABLE IF NOT EXISTS  retailapp. EMPLOYEES ;
--- DROP TABLE IF NOT EXISTS  retailapp. ORDERDETAILS ;
+-- DROP TABLE IF NOT EXISTS  retailapp. ORDER_DETAILS ;
 -- DROP TABLE IF NOT EXISTS  retailapp. ORDERS ;
 -- DROP TABLE IF NOT EXISTS  retailapp. PRODUCTS ;
 -- DROP TABLE IF NOT EXISTS  retailapp.  SHIPPERS ;
@@ -287,5 +291,16 @@ INSERT INTO Cart (CartID, CustomerID, ProductID, Quantity) VALUES
 (13, 3, 13, 3),
 (14, 4, 14, 1),
 (15, 5, 15, 2);
+
+
+-- Inserting data into Payments table
+INSERT INTO retailapp.Payments
+(PaymentID, PaymentDate, Currency, Amount, OrderID, CustomerID, PaymentMethod)
+VALUES
+(101, CURRENT_TIMESTAMP, 'USD', 199.99, 1, 1, 'Credit Card'),
+(102, CURRENT_TIMESTAMP, 'USD', 89.50, 2, 2, 'PayPal'),
+(103, CURRENT_TIMESTAMP, 'USD', 49.00, 3, 1, 'Debit Card'),
+(104, CURRENT_TIMESTAMP, 'USD', 120.75, 4, 3, 'UPI'),
+(105, CURRENT_TIMESTAMP, 'USD', 315.00, 5, 4, 'Bank Transfer');
 
 commit;
