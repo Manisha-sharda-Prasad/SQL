@@ -1,3 +1,7 @@
+
+--DDL (DATA DEFINITION LANGUAGE)- (CREATE, ALTER, DROP)
+-- 1. CREATE TABLE-
+
 -- Customers Table
 CREATE TABLE IF NOT EXISTS  retailapp.Customers (
     CustomerID INT PRIMARY KEY,
@@ -66,6 +70,7 @@ CREATE TABLE IF NOT EXISTS  retailapp. Orders (
     FOREIGN KEY (CustomerID) REFERENCES retailapp.Customers(CustomerID),
     FOREIGN KEY (EmployeeID) REFERENCES retailapp.Employees(EmployeeID),
     FOREIGN KEY (ShipperID) REFERENCES retailapp.Shippers(ShipperID)
+    --FOREIGN KEY (PaymentID) REFERENCES retailapp.Payments(PaymentID)
 );
 
 -- OrderDetails Table
@@ -100,6 +105,35 @@ CREATE TABLE IF NOT EXISTS  retailapp. Cart (
 );
 
 
+-- Primary Key: payment_id,  Foreign Key: customer_id → Customers(customer_id)
+-- Payments
+
+
+CREATE TABLE IF NOT EXISTS retailapp.Payments (
+    PaymentID INT Primary Key,
+    PaymentDate TimeStamp,
+    Currency Varchar(10),
+    Amount Decimal(10, 2),
+    OrderID INT,
+    CustomerID INT,
+    FOREIGN KEY (OrderID) REFERENCES retailapp.orders(OrderID),
+    FOREIGN KEY (CustomerID) REFERENCES retailapp.Customers(CustomerID)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- DROP TABLE-
 
 -- DROP TABLE IF NOT EXISTS  retailapp. CATEGORIES ;
 -- DROP TABLE IF NOT EXISTS  retailapp. CUSTOMERS ;

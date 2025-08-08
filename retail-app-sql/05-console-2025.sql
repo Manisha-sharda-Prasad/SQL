@@ -1,3 +1,10 @@
+-- DQL (Data Query Language) queries- retrieve data from the database.
+--- (SELECT, FROM, WHERE, JOIN, GROUP BY, HAVING, ORDER BY, LIMIT)
+
+-- SQL Queries for Retail Application Database--
+-- This script contains various SQL queries to interact with the retail application database.
+
+
 -- Beginner-level :--
 
 --1. Show all customers with their city and country.
@@ -193,3 +200,16 @@ where p.categoryid = (
 --Get the latest order placed by each customer.
 
 --Find the shops (from Shop table) that have the most carts (from Cart table).
+
+
+CREATE TABLE IF NOT EXISTS retailapp.Payments (
+    PaymentID INT Primary Key,
+    PaymentDate TimeStamp,
+    Currency Varchar(10),
+    Amount Decimal(10, 2),
+    OrderID INT,
+    CustomerID INT,
+    FOREIGN KEY (OrderID) REFERENCES retailapp.orders(OrderID),
+    FOREIGN KEY (CustomerID) REFERENCES retailapp.Customers(CustomerID)
+);
+
