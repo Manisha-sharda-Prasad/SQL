@@ -202,14 +202,5 @@ where p.categoryid = (
 --Find the shops (from Shop table) that have the most carts (from Cart table).
 
 
-CREATE TABLE IF NOT EXISTS retailapp.Payments (
-    PaymentID INT Primary Key,
-    PaymentDate TimeStamp,
-    Currency Varchar(10),
-    Amount Decimal(10, 2),
-    OrderID INT,
-    CustomerID INT,
-    FOREIGN KEY (OrderID) REFERENCES retailapp.orders(OrderID),
-    FOREIGN KEY (CustomerID) REFERENCES retailapp.Customers(CustomerID)
-);
+
 
