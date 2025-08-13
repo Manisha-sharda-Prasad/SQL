@@ -132,7 +132,7 @@ RENAME COLUMN POSTALCODE TO ZIPCODE;
 Alter table retailapp.Cart
 DROP COLUMN IF EXISTS CreatedAt;
 
---alter table retailapp.Cart
+--alter Cart
 --MODIFY column Quantity INT NOT NULL;
 
 

@@ -188,7 +188,12 @@ where p.categoryid = (
     );
 
 
-
+--Where operators :-
+--1.Comparison op. - ( =, > , <=, =! )
+--2.Logical op- ( AND, OR , NOT )
+--3.Range op. - ( BETWEEN )
+--4.Membership op- ( IN, Not IN )
+--5.Search op - ( LIKE , NOT LIKE )- ('%' , '_')
 
 --Complex Queries
 --Show top 3 customers who spent the most.
